@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "god_game", "god_game.vcxproj", "{2F762C28-FDEA-46BB-8D6B-C10DB12E1156}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F762C28-FDEA-46BB-8D6B-C10DB12E1156}.Debug|x64.ActiveCfg = Debug|x64
+		{2F762C28-FDEA-46BB-8D6B-C10DB12E1156}.Debug|x64.Build.0 = Debug|x64
+		{2F762C28-FDEA-46BB-8D6B-C10DB12E1156}.Release|x64.ActiveCfg = Release|x64
+		{2F762C28-FDEA-46BB-8D6B-C10DB12E1156}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FA360ED-A9FB-4B45-936E-93F060D0057B}
+	EndGlobalSection
+EndGlobal

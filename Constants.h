@@ -2,7 +2,7 @@
 
 namespace Constants
 {
-	constexpr StringView GameIdentityTitleName = U"Sin";
+	constexpr StringView TitleName = U"Sin";
 
 	constexpr int ScreenHeight = 900;
 	constexpr int ScreenWidth = 1600;

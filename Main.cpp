@@ -2,10 +2,13 @@
 #include "Game.h"
 #include "Constants.h"
 
+using namespace SinGame;
+
 void Main()
 {
 	//windowタイトルを決定する
-	Window::SetTitle(Constants::GameIdentityTitleName);
+	Window::SetTitle(Constants::TitleName);
+	Window::SetStyle(WindowStyle::Sizable);
 
 	// 背景の色を設定する
 	Scene::SetBackground(Constants::Gold);
@@ -16,6 +19,10 @@ void Main()
 
 	class Game game;
 	bool succes = game.Inisitalize();
+	if (!succes)
+	{
+		return;
+	}
 	while (System::Update())
 	{
 		game.RunLoop();

@@ -6,14 +6,18 @@
 // See LICENSE in root directory for full details.
 // ----------------------------------------------------------------
 
+#include <Siv3D.hpp>
 #include "Game.h"
 #include "Actor/Actor.h"
 #include "Actor/DirtTile.h"
 #include "Component/SpriteComponent.h"
+#include "Scene/GameScene.h"
+#include "Scene/TitleScene.h"
 
 using namespace SinGame;
 
 Game::Game()
+	:mUpdatingActors(false)
 {
 
 }
@@ -22,12 +26,16 @@ bool Game::Inisitalize()
 {
 	//シーンマネージャーの宣言
 	SceneManager<String> sceneManager;
-	/*
-#if _DEBUG
-	sceneManager.add<>
 	
+#if _DEBUG
+	sceneManager.add<GameScene>(U"GameScene");
+
+#else
+	sceneManager.add<TitleScene>(U"TitleScene");
 #endif
-	*/
+
+	
+	
 	LoadData();
 	return true;
 }
@@ -85,19 +93,24 @@ void Game::UpdateGame()
 	{
 		delete actor;
 	}
+
+	SceneManager<String> sceneManager;
+	sceneManager.update();
 }
 
 //描画の結果を処理
 void Game::GenerateOutput()
 {
+	for (auto sprite : mSprites)
+	{
+		sprite->Draw();
+	}
 }
 
 //起動時の読込
 void Game::LoadData()
 {
-	DirtTile* dirtTile = new DirtTile(this);
-	dirtTile->SetPosition(Vec2(400.0f, 300.0f));
-
+	
 }
 
 //終了時の処理
@@ -111,7 +124,7 @@ void Game::Shutdown()
 
 void Game::AddActor(Actor* actor)
 {
-	//アクターを更新する際は、ぺディングに追加
+	//アクターを更新する際は、ぺンディングに追加
 	if (mUpdatingActors)
 	{
 		mPendingActors.emplace_back(actor);

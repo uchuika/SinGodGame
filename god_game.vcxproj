@@ -342,6 +342,7 @@
     <ClInclude Include="Scene\CommonSceneData.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\TitleScene.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

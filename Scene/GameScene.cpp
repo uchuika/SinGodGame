@@ -9,8 +9,10 @@ using namespace SinGame;
 GameScene::GameScene(const InitData& init)
 	:IScene{ init }
 {
-	//DirtTile* dirtTile = new DirtTile();
-	//dirtTile->SetPosition(Vec2(400.0f, 300.0f));
+	// Game::getGame() はインスタンスメソッドなので、Gameオブジェクトが必要
+	// 共有データからGameインスタンスを取得する
+	DirtTile* dirtTile = new DirtTile(Game::Instance());
+	dirtTile->SetPosition(Vec2(400.0f, 300.0f));
 }
 
 void GameScene::update()

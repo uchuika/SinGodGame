@@ -1,13 +1,16 @@
 ﻿#pragma once
 #include <Siv3D.hpp>
 #include "Actor/Actor.h"
+#include "Singleton.h";
 
 namespace SinGame
 {
-	class Game
+	class Game :public Singleton<Game>
 	{
 	public:
 		Game();
+		friend Singleton<Game>;
+
 		bool Inisitalize();
 		void RunLoop();
 		void Shutdown();

@@ -17,11 +17,10 @@ SpriteComponent::~SpriteComponent()
 
 void SpriteComponent::Draw()
 {
-	
 	if (not mTexture.isEmpty())
 	{
-		//Logger << U"SpriteComponent::Draw";
-		mTexture.drawAt(mOwner->GetPosition());
+		
+		mTexture.scaled(mOwner->GetScale()).drawAt(mOwner->GetPosition());
 	}
 }
 

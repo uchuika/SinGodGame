@@ -2,19 +2,22 @@
 #include "../Game.h"
 #include "../Actor/Actor.h"
 #include "../Component/SpriteComponent.h"
+#include "../Constants.h"
 
 using namespace SinGame;
+using namespace Constants;
 
 DirtTile::DirtTile(class Game* game)
 	:Actor(game)
 {
-	SpriteComponent* sc = new SpriteComponent(this, 150);
-	const Texture texture1{ U"example/windmill.png" };
-	sc->SetTexture( texture1 );
+
 	Logger << U"DirtTile::Init";
+	//const Texture texture1{ U"example/windmill.png" };
+	SpriteComponent* sc = new SpriteComponent(this);
+	sc->SetTexture(game->GetTexture("Assets/DirtTile1.png"));
+	
 }
 
 void DirtTile::UpdateActor(double deltaTime)
 {
-
 }

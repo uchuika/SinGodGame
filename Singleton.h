@@ -6,10 +6,10 @@ namespace SinGame
 	class Singleton {
 
 	protected:
-		Singleton() {}
-		virtual ~Singleton() {}
-		Singleton(const Singleton& r) {}
-		Singleton& operator=(const Singleton& r) {}
+		Singleton() = default;
+		virtual ~Singleton() = default;
+		Singleton(const Singleton& r) = default;
+		Singleton& operator=(const Singleton& r) = default;
 
 	public:
 		static _T* Instance() {

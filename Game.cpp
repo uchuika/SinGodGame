@@ -13,29 +13,37 @@
 #include "Component/SpriteComponent.h"
 #include "Scene/GameScene.h"
 #include "Scene/TitleScene.h"
+#include "Scene/CommonSceneData.h"
 
 using namespace SinGame;
 
 Game::Game()
 	:mUpdatingActors(false)
+	,mGame(this)
 {
-
 }
+
+
 
 bool Game::Inisitalize()
 {
+	mCamera = Camera2D(Vec2{ 960, 540 }, 1.0);
+
 	//シーンマネージャーの宣言
-	SceneManager<String> sceneManager;
+	//SceneManager<String> sceneManager;
 	
 #if _DEBUG
-	sceneManager.add<GameScene>(U"GameScene");
+	//デバッグ時は直接ゲームシーンへ
+	mSceneManager.add<GameScene>(U"GameScene");
+	mSceneManager.init(U"GameScene", 0.0s);
+	mFlowChartState = GameChart;
+	
 
 #else
 	sceneManager.add<TitleScene>(U"TitleScene");
 #endif
 
-	
-	
+
 	LoadData();
 	return true;
 }
@@ -47,14 +55,6 @@ void Game::RunLoop()
 	UpdateGame();
 	GenerateOutput();
 }
-
-/*
-//フローチャート作成
-void Game::DoChart()
-{
-
-}
-*/
 
 //インプットの処理
 void Game::ProcessInput()
@@ -94,17 +94,37 @@ void Game::UpdateGame()
 		delete actor;
 	}
 
-	SceneManager<String> sceneManager;
-	sceneManager.update();
+	//カメラの更新
+	mCamera.update();
+
+	const auto t = mCamera.createTransformer();
+
+	//フローチャートの実行
+	DoChart();
+
+	mSceneManager.update();
 }
+
+//ゲームループのフローチャート
+void Game::DoChart()
+{
+	/*
+	switch (mFlowChartState)
+	{
+		case TitleChart:
+			//タイトル画面の処理
+			break;
+
+		case GameChart:
+
+	}
+	*/
+}
+
 
 //描画の結果を処理
 void Game::GenerateOutput()
 {
-	for (auto sprite : mSprites)
-	{
-		sprite->Draw();
-	}
 }
 
 //起動時の読込
@@ -120,6 +140,28 @@ void Game::UnloadData()
 
 void Game::Shutdown()
 {
+}
+
+//テクスチャの登録と取得
+Texture Game::GetTexture(const std::string fileName)
+{
+	Texture tex;
+	// Is the texture already in the map?
+	auto iter = mTextures.find(fileName);
+	if (iter != mTextures.end())
+	{
+		tex = iter->second;
+	}
+	else
+	{
+
+		// Create texture from surface
+		tex = Texture{ Unicode::Widen(fileName) };
+		
+
+		mTextures.emplace(fileName, tex);
+	}
+	return tex;
 }
 
 void Game::AddActor(Actor* actor)
@@ -158,11 +200,13 @@ void Game::RemoveActor(Actor* actor)
 
 void Game::AddSprite(SpriteComponent* sprite)
 {
-	//ソートされた配列のどこに入れるか検索
+	// ソートされたベクトルの挿入点を見つける
+	// (自分よりドロー順位の高い最初の要素)
 	int myDrawOrder = sprite->GetDrawOrder();
 	auto iter = mSprites.begin();
-
-	for (; iter != mSprites.end(); ++iter)
+	for (;
+		iter != mSprites.end();
+		++iter)
 	{
 		if (myDrawOrder < (*iter)->GetDrawOrder())
 		{
@@ -170,8 +214,9 @@ void Game::AddSprite(SpriteComponent* sprite)
 		}
 	}
 
-	//イテレータの位置より前に要素を挿入する
+	// イテレータの位置より前に要素を挿入する
 	mSprites.insert(iter, sprite);
+	//Logger << mSprites.size();
 }
 
 void Game::RemoveSprite(SpriteComponent* sprite)
@@ -179,6 +224,9 @@ void Game::RemoveSprite(SpriteComponent* sprite)
 	auto iter = std::find(mSprites.begin(), mSprites.end(), sprite);
 	mSprites.erase(iter);
 }
+
+
+
 
 
 

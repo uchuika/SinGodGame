@@ -1,5 +1,8 @@
 ﻿#pragma once
+
+#include <Siv3D.hpp>
 #include "../Game.h"
+#include "../Actor/Actor.h" // 追加: Actorクラスの定義をインクルード
 
 namespace SinGame
 {
@@ -7,8 +10,11 @@ namespace SinGame
 	{
 	public:
 		GameScene(const InitData& init);
+
 		void update() override;
 		//void draw() const override;
+	private:
+		Grid<Actor*> mTileGrid;
 	};
 
 }

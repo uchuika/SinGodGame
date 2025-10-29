@@ -2,8 +2,5 @@
 
 namespace SinGame
 {
-	struct GameData
-	{
-		class Game* game;
-	};
+	
 }

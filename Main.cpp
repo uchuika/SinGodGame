@@ -17,17 +17,20 @@ void Main()
 	Window::Resize(1600, 900);
 	System::SetTerminationTriggers(UserAction::CloseButtonClicked);
 
-	class Game game;
-	bool succes = game.Inisitalize();
+	//サンプラーステートをNearestに設定
+	const ScopedRenderStates2D rs{ SamplerState::ClampNearest };
+
+	//class Game game;
+	bool succes = Game::Instance()->Inisitalize();
 	if (!succes)
 	{
 		return;
 	}
 	while (System::Update())
 	{
-		game.RunLoop();
+		Game::Instance()->RunLoop();
 	}
-	game.Shutdown();
+	Game::Instance()->Shutdown();
 }
 
 //

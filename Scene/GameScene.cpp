@@ -6,6 +6,9 @@
 #include "../Constants.h"
 #include "../Component/SpriteComponent.h"
 
+using namespace SinGame;
+
+/*
 using namespace Constants;
 using namespace SinGame;
 
@@ -47,11 +50,57 @@ void GameScene::drawUI() const
 {
 	Camera2D camera = Game::Instance()->GetCamera();
 	//Logger << U"drawUI";
-	// Game::Instance() でシングルトンインスタンスを取得し、GetTextureでテクスチャを取得
-	// 戻り値の型は auto で推論
 	Texture texture = Game::Instance()->GetTexture("example/windmill.png");
 	// テクスチャを描画
 	texture.scaled(camera.getTargetScale()).drawAt(camera.getCenter().x, camera.getCenter().y);
 
 	Print << U"Camera Scale: " << camera.getScale();
+}*/
+const char* GameScene::ParameterTagStage = "ParameterTagStage";	//パラメータのタグ「ステージ」
+const char* GameScene::ParameterTagLevel = "ParameterTagLevel";	//パラメータのタグ「レベル」
+
+GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, class Game* game) : AbstractScene(impl, parameter, game)
+, mGame(game)
+, mCount(0)
+{
+	_level = parameter.get(ParameterTagLevel);
+
+	DirtTile* dirtTile = new DirtTile(game);
+	Logger << U"createDirtTitle";
+	dirtTile->SetPosition(Vec2(400.0f,300.0f));
+	//dirtTile->SetScale((float)scale);
+}
+
+void GameScene::update()
+{
+	sprites = mGame->GetSprites();
+
+}
+
+void GameScene::draw() const
+{
+	Camera2D camera = mGame->GetCamera();
+	const auto t = camera.createTransformer();
+
+	for(SpriteComponent* sprite : sprites)
+	{
+		sprite->Draw();
+	}
+}
+
+void GameScene::drawUI() const
+{
+	Camera2D camera = mGame->GetCamera();
+	//const Transformer2D t{ Mat3x2::Mat3x2(), TransformCursor::Yes, Transformer2D::Target::PushCamera };
+	//const auto t = camera.createTransformer();
+
+	const Mat3x2 mat = Mat3x2::Translate(camera.getCenter());
+	const Transformer2D t{ mat };
+
+	font(U"test").drawAt(camera.getCenter());
+}
+
+EScene GameScene::GetScene() const
+{
+	return EScene::Game;
 }

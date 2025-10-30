@@ -13,11 +13,10 @@ namespace SinGame
 		GameChart,
 	};
 
-	class Game : public Singleton<class Game>, public IOnSceneChangedListener
+	class Game : public IOnSceneChangedListener
 	{
 	public:
 		Game();
-		friend Singleton<Game>;
 
 		bool Inisitalize();
 		void RunLoop();
@@ -39,6 +38,9 @@ namespace SinGame
 
 		//ゲッター/セッター
 		Camera2D GetCamera() { return mCamera; }
+
+		void onSceneChanged(const EScene scene, const Parameter& parameter, const bool stackClear) override;
+		void onSceneChanged(const bool popScene) override;
 
 	private:
 		void ProcessInput();
@@ -70,8 +72,11 @@ namespace SinGame
 
 		Camera2D mCamera;
 
+		//シーンのスタック
+		std::stack<std::shared_ptr<AbstractScene>> mSceneStack;
+
 		//シーンマネージャー
-		SceneManager<String> mSceneManager;
+		//SceneManager<String> mSceneManager;
 	};
 
 }

@@ -5,8 +5,8 @@
 
 using namespace SinGame;
 
-TitleScene::TitleScene(const InitData& init)
-	:IScene{ init }
+TitleScene::TitleScene(IOnSceneChangedListener* impl, const Parameter& parameter, class Game* game) : AbstractScene(impl, parameter, game)
+, mGame(game)
 {
 
 }
@@ -14,4 +14,17 @@ TitleScene::TitleScene(const InitData& init)
 void TitleScene::update()
 {
 
+}
+
+void TitleScene::draw() const
+{
+}
+
+void TitleScene::drawUI() const
+{
+}
+
+EScene TitleScene::GetScene() const
+{
+	return EScene::Title;
 }

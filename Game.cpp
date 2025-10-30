@@ -31,20 +31,28 @@ bool Game::Inisitalize()
 
 	//シーンマネージャーの宣言
 	//SceneManager<String> sceneManager;
-	
+
+	LoadData();
+
 #if _DEBUG
+	/*
 	//デバッグ時は直接ゲームシーンへ
 	mSceneManager.add<GameScene>(U"GameScene");
 	mSceneManager.init(U"GameScene", 0.0s);
 	mFlowChartState = GameChart;
-	
+	*/
+	//タイトル画面シーンを作ってpush
+	Parameter parameter;
+	mSceneStack.push(std::make_shared<GameScene>(this, parameter, this));
+
 
 #else
-	sceneManager.add<TitleScene>(U"TitleScene");
+	//sceneManager.add<TitleScene>(U"TitleScene");
+	Parameter parameter;
+	mSceneStack.push(std::make_shared<TitleScene>(this, parameter, this));
 #endif
 
 
-	LoadData();
 	return true;
 }
 
@@ -94,15 +102,18 @@ void Game::UpdateGame()
 		delete actor;
 	}
 
+	//スタックのトップのシーンを更新
+	mSceneStack.top()->update();
+
 	//カメラの更新
 	mCamera.update();
-
-	const auto t = mCamera.createTransformer();
 
 	//フローチャートの実行
 	DoChart();
 
+	/*
 	mSceneManager.update();
+	*/
 }
 
 //ゲームループのフローチャート
@@ -125,6 +136,9 @@ void Game::DoChart()
 //描画の結果を処理
 void Game::GenerateOutput()
 {
+	mSceneStack.top()->draw();
+
+	mSceneStack.top()->drawUI();
 }
 
 //起動時の読込
@@ -224,6 +238,36 @@ void Game::RemoveSprite(SpriteComponent* sprite)
 	auto iter = std::find(mSprites.begin(), mSprites.end(), sprite);
 	mSprites.erase(iter);
 }
+
+void Game::onSceneChanged(const EScene scene, const Parameter& parameter, const bool stackClear)
+{
+	if (stackClear) {	//スタッククリア
+		//スタックを全部ポップする(スタックを空にする)
+		while (!mSceneStack.empty()) {
+			mSceneStack.pop();
+		}
+	}
+
+	switch (scene) {
+	case EScene::Title:
+		mSceneStack.push(std::make_shared<TitleScene>(this, parameter, this));
+		break;
+	case EScene::Game:
+		mSceneStack.push(std::make_shared<GameScene>(this, parameter, this));
+		break;
+	default:
+		//存在しないシーンが呼ばれたどうしようもないエラーが発生
+		break;
+	}
+}
+
+void Game::onSceneChanged(const bool popScene)
+{
+	if (popScene) {
+		mSceneStack.pop();
+	}
+}
+
 
 
 

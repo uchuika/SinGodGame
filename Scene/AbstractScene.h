@@ -5,9 +5,9 @@
 #include "Parameter.h"
 #include "Math.h"
 
-class IOnSceneChangedListener;
-
 namespace SinGame {
+	class IOnSceneChangedListener;
+
 	//ストラテジーパターンという物を使ってシーンスタック側は指示された
 // インスタンスを条件分岐させながら作るだけで完了となるよう設計
 	class AbstractScene

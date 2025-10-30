@@ -20,17 +20,17 @@ void Main()
 	//サンプラーステートをNearestに設定
 	const ScopedRenderStates2D rs{ SamplerState::ClampNearest };
 
-	//class Game game;
-	bool succes = Game::Instance()->Inisitalize();
+	class Game game;
+	bool succes = game.Inisitalize();
 	if (!succes)
 	{
 		return;
 	}
 	while (System::Update())
 	{
-		Game::Instance()->RunLoop();
+		game.RunLoop();
 	}
-	Game::Instance()->Shutdown();
+	game.Shutdown();
 }
 
 //

@@ -6,20 +6,33 @@
 
 namespace SinGame
 {
-	class GameScene : public SceneManager<String>::Scene
+	class GameScene : public AbstractScene
 	{
 	public:
-		GameScene(const InitData& init);
+
+		const static char* ParameterTagStage;	//パラメータのタグ「ステージ」
+		const static char* ParameterTagLevel;	//パラメータのタグ「レベル」
+
+		GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, class Game* game);
+		virtual ~GameScene() = default;
 
 		void update() override;
-		//void draw() const override;
-
-		void drawUI() const;
+		void draw() const override;
+		void drawUI() const override;
+		EScene GetScene() const override;
 
 	private:
-		Grid<Actor*> mTileGrid;
+		int _level;
+		class Game* mGame;
+		Array<class SpriteComponent*> sprites;
+		Array<class CharacterComponent*> characters;
+		Array<class Enemy*> enemieseActor;	//EnemyActorを格納するベクターs	
 
-		
+		//カウンタ
+		int mCount = 0;	//ゲームループカウンタ
+
+		Font font{ FontMethod::MSDF, 48 };
+
+		class Player* mPlayer;	//プレイヤーメンバ変数
 	};
-
 }

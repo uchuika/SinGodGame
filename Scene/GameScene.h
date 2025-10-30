@@ -13,8 +13,13 @@ namespace SinGame
 
 		void update() override;
 		//void draw() const override;
+
+		void drawUI() const;
+
 	private:
 		Grid<Actor*> mTileGrid;
+
+		
 	};
 
 }

@@ -122,7 +122,9 @@
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Scene\AbstractScene.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
+    <ClCompile Include="Scene\Parameter.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -340,8 +342,12 @@
     <ClInclude Include="Component\SpriteComponent.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Scene\AbstractScene.h" />
     <ClInclude Include="Scene\CommonSceneData.h" />
+    <ClInclude Include="Scene\EScene.h" />
     <ClInclude Include="Scene\GameScene.h" />
+    <ClInclude Include="Scene\IOnSceneChangedListener.h" />
+    <ClInclude Include="Scene\Parameter.h" />
     <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="stdafx.h" />

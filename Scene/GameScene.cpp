@@ -45,10 +45,13 @@ void GameScene::update()
 
 void GameScene::drawUI() const
 {
+	Camera2D camera = Game::Instance()->GetCamera();
 	//Logger << U"drawUI";
 	// Game::Instance() でシングルトンインスタンスを取得し、GetTextureでテクスチャを取得
 	// 戻り値の型は auto で推論
 	Texture texture = Game::Instance()->GetTexture("example/windmill.png");
 	// テクスチャを描画
-	texture.draw(50, 50);
+	texture.scaled(camera.getTargetScale()).drawAt(camera.getCenter().x, camera.getCenter().y);
+
+	Print << U"Camera Scale: " << camera.getScale();
 }

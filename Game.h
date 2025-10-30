@@ -1,8 +1,9 @@
 ﻿#pragma once
 #include <Siv3D.hpp>
 #include "Actor/Actor.h"
-#include "Singleton.h";
+#include "Singleton.h"
 #include "Scene/CommonSceneData.h"
+#include "Scene/IOnSceneChangedListener.h"
 
 namespace SinGame
 {
@@ -12,7 +13,7 @@ namespace SinGame
 		GameChart,
 	};
 
-	class Game :public Singleton<Game>
+	class Game : public Singleton<class Game>, public IOnSceneChangedListener
 	{
 	public:
 		Game();
@@ -31,12 +32,13 @@ namespace SinGame
 		void SetFlowChartState(flowChartState state) { mFlowChartState = state; }
 		flowChartState GetFlowChartState() { mFlowChartState; }
 
-
 		//テクスチャの登録と取得
 		Texture GetTexture(const std::string fileName);
 
 		Array<class SpriteComponent*>& GetSprites() { return mSprites; }
 
+		//ゲッター/セッター
+		Camera2D GetCamera() { return mCamera; }
 
 	private:
 		void ProcessInput();

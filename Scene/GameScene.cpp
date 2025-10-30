@@ -92,12 +92,12 @@ void GameScene::drawUI() const
 {
 	Camera2D camera = mGame->GetCamera();
 	//const Transformer2D t{ Mat3x2::Mat3x2(), TransformCursor::Yes, Transformer2D::Target::PushCamera };
-	//const auto t = camera.createTransformer();
+	const auto t = camera.createTransformer();
 
-	const Mat3x2 mat = Mat3x2::Translate(camera.getCenter());
-	const Transformer2D t{ mat };
+	//const Mat3x2 mat = Mat3x2::Translate(camera.getCenter());
+	//const Transformer2D t{ mat, TransformCursor::Yes, Transformer2D::Target::PushCamera };
 
-	font(U"test").drawAt(camera.getCenter());
+	font(U"test").drawAt(camera.getCenter()).scaled(1/camera.getScale());
 }
 
 EScene GameScene::GetScene() const

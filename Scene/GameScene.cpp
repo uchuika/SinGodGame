@@ -65,10 +65,24 @@ GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, 
 {
 	_level = parameter.get(ParameterTagLevel);
 
-	DirtTile* dirtTile = new DirtTile(game);
-	Logger << U"createDirtTitle";
-	dirtTile->SetPosition(Vec2(400.0f,300.0f));
-	//dirtTile->SetScale((float)scale);
+	double Tilenum = 20;
+	double TileHeightNum = 10;
+	double TileSize = 1080 / Tilenum;
+	double scale = TileSize / 32;
+
+	mTileGrid = Grid<Actor*>((int)Tilenum, (int)TileHeightNum);
+
+
+	for (int i = 0; i < Tilenum; i++) {
+		for (int j = 0; j < TileHeightNum; j++) {
+			DirtTile* dirtTile = new DirtTile(mGame);
+			dirtTile->SetPosition(Vec2(400.0f + i * (float)TileSize, 300.0f + j * (float)TileSize));
+			dirtTile->SetScale((float)scale);
+			mTileGrid[Point{ i, j }] = dirtTile;
+		}
+	}
+
+	
 }
 
 void GameScene::update()
@@ -90,14 +104,7 @@ void GameScene::draw() const
 
 void GameScene::drawUI() const
 {
-	Camera2D camera = mGame->GetCamera();
-	//const Transformer2D t{ Mat3x2::Mat3x2(), TransformCursor::Yes, Transformer2D::Target::PushCamera };
-	const auto t = camera.createTransformer();
-
-	//const Mat3x2 mat = Mat3x2::Translate(camera.getCenter());
-	//const Transformer2D t{ mat, TransformCursor::Yes, Transformer2D::Target::PushCamera };
-
-	font(U"test").drawAt(camera.getCenter()).scaled(1/camera.getScale());
+	font(U"test").draw(0, 0);
 }
 
 EScene GameScene::GetScene() const

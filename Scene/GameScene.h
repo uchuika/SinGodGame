@@ -26,7 +26,10 @@ namespace SinGame
 		class Game* mGame;
 		Array<class SpriteComponent*> sprites;
 		Array<class CharacterComponent*> characters;
-		Array<class Enemy*> enemieseActor;	//EnemyActorを格納するベクターs	
+		Array<class Enemy*> enemieseActor;	//EnemyActorを格納するベクターs
+
+		//マップ格納用Grid
+		Grid<class Actor*> mTileGrid;
 
 		//カウンタ
 		int mCount = 0;	//ゲームループカウンタ

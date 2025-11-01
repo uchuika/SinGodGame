@@ -29,7 +29,7 @@ namespace SinGame
 		Array<class Enemy*> enemieseActor;	//EnemyActorを格納するベクターs
 
 		//マップ格納用Grid
-		Grid<class Actor*> mTileGrid;
+		Grid<class Actor*> mMapGrid;
 
 		//カウンタ
 		int mCount = 0;	//ゲームループカウンタ

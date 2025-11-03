@@ -20,7 +20,7 @@ namespace SinGame {
 		virtual ~AbstractScene() = default;
 		virtual void update() = 0;
 		virtual void draw() const = 0;
-		virtual void drawUI() const = 0;
+		virtual void drawUI() = 0;
 		virtual EScene GetScene() const = 0;
 	};
 

@@ -11,6 +11,7 @@
 #include "Actor/Actor.h"
 #include "Actor/DirtTile.h"
 #include "Component/SpriteComponent.h"
+#include "Component/CharacterComponent.h"
 #include "Scene/GameScene.h"
 #include "Scene/TitleScene.h"
 #include "Scene/CommonSceneData.h"
@@ -237,6 +238,32 @@ void Game::RemoveSprite(SpriteComponent* sprite)
 {
 	auto iter = std::find(mSprites.begin(), mSprites.end(), sprite);
 	mSprites.erase(iter);
+}
+
+void Game::AddCharacter(CharacterComponent* chara)
+{
+	// ソートされたベクトルの挿入点を見つける
+	// (自分よりドロー順位の高い最初の要素)
+	int myDrawOrder = chara->GetDrawOrder();
+	auto iter = mCharacters.begin();
+	for (;
+		iter != mCharacters.end();
+		++iter)
+	{
+		if (myDrawOrder < (*iter)->GetDrawOrder())
+		{
+			break;
+		}
+	}
+
+	// イテレータの位置より前に要素を挿入する
+	mCharacters.insert(iter, chara);
+}
+
+void Game::RemoveCharacter(CharacterComponent* chara)
+{
+	auto iter = std::find(mCharacters.begin(), mCharacters.end(), chara);
+	mCharacters.erase(iter);
 }
 
 void Game::onSceneChanged(const EScene scene, const Parameter& parameter, const bool stackClear)

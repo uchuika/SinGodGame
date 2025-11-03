@@ -11,7 +11,7 @@ void Main()
 	Window::SetStyle(WindowStyle::Sizable);
 
 	// 背景の色を設定する
-	Scene::SetBackground(Constants::Gold);
+	Scene::SetBackground(Constants::AquaMarine);
 	Scene::SetResizeMode(ResizeMode::Keep);
 	Scene::Resize(1920, 1080);
 	Window::Resize(1600, 900);

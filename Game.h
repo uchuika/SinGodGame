@@ -28,6 +28,9 @@ namespace SinGame
 		void AddSprite(class SpriteComponent* sprite);
 		void RemoveSprite(class SpriteComponent* sprite);
 
+		void AddCharacter(class CharacterComponent* chara);
+		void RemoveCharacter(class CharacterComponent* chara);
+
 		void SetFlowChartState(flowChartState state) { mFlowChartState = state; }
 		flowChartState GetFlowChartState() { mFlowChartState; }
 
@@ -35,6 +38,8 @@ namespace SinGame
 		Texture GetTexture(const std::string fileName);
 
 		Array<class SpriteComponent*>& GetSprites() { return mSprites; }
+		Array<class CharacterComponent*>& GetCharacters() { return mCharacters; }
+		Array<class Actor*>& GetActors() { return mActors; }
 
 		//ゲッター/セッター
 		Camera2D GetCamera() { return mCamera; }
@@ -64,6 +69,9 @@ namespace SinGame
 
 		//描画スプライトコンポーネントの配列
 		Array<class SpriteComponent*> mSprites;
+
+		//描画キャラクターコンポーネントの配列
+		Array<class CharacterComponent*> mCharacters;
 
 		//チャートの状態
 		flowChartState mFlowChartState;

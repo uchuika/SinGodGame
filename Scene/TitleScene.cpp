@@ -13,15 +13,21 @@ TitleScene::TitleScene(IOnSceneChangedListener* impl, const Parameter& parameter
 
 void TitleScene::update()
 {
+	if (KeyZ.down())
+	{
 
+		Parameter parameter;
+		_implSceneChanged->onSceneChanged(EScene::Game,parameter, false);
+	}
 }
 
 void TitleScene::draw() const
 {
 }
 
-void TitleScene::drawUI() const
+void TitleScene::drawUI()
 {
+	font(U"タイトルシーン").drawAt(960, 540);
 }
 
 EScene TitleScene::GetScene() const

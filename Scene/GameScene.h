@@ -1,8 +1,15 @@
 ﻿#pragma once
 
-#include <Siv3D.hpp>
 #include "../Game.h"
-#include "../Actor/Actor.h" // 追加: Actorクラスの定義をインクルード
+#include "../Actor/DirtTile.h"
+#include "../Actor/Tile.h"
+#include "../Actor/Resident.h"
+#include "../Map/GridTexture.h"
+#include "../Map/MapGrid.h"
+#include "../Constants.h"
+#include "../Component/SpriteComponent.h"
+#include "../Component/CharacterComponent.h"
+#include "../Map/World.h"
 
 namespace SinGame
 {
@@ -18,7 +25,7 @@ namespace SinGame
 
 		void update() override;
 		void draw() const override;
-		void drawUI() const override;
+		void drawUI() override;
 		EScene GetScene() const override;
 
 	private:
@@ -26,15 +33,26 @@ namespace SinGame
 		class Game* mGame;
 		Array<class SpriteComponent*> sprites;
 		Array<class CharacterComponent*> characters;
-		Array<class Enemy*> enemieseActor;	//EnemyActorを格納するベクターs
+		Array<class Resident*> ResidentActors;	
 
-		//マップ格納用Grid
-		Grid<class Actor*> mMapGrid;
+		//NPCの行動を更新
+		void npcUpdate();
 
-		//カウンタ
-		int mCount = 0;	//ゲームループカウンタ
+		//世界の状態を更新
+		void worldUpdate();
+
+		MapGrid* grid;
+		World* world;
+
+		int mTargetFaithLevel = 0;
+		int mTotalFaithLevel = 0;
+		double mTempLevel = 15.0;
 
 		Font font{ FontMethod::MSDF, 48 };
+
+		const double interval = 2.0;
+
+		double accumlatedTime = 0.0;
 
 		class Player* mPlayer;	//プレイヤーメンバ変数
 	};

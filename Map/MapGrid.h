@@ -14,11 +14,14 @@ namespace SinGame
 	public:
 		MapGrid(class Game* game, int height, int width, GridTexture gridTex);
 
-		void UpdateMapGrid();
+		void UpdateMapGrid(Grid<int32> map);
 
 		Grid<Tile*>& GetTileGrid() { return mTileGrid; }
+		double GetTileScale() { return mTileScale; }
 
 	private:
 		Grid<Tile*> mTileGrid;
+
+		double mTileScale;
 	};
 }

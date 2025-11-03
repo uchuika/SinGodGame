@@ -10,9 +10,11 @@ namespace SinGame {
 		virtual ~TitleScene() = default;
 		void update() override;
 		void draw() const override;
-		void drawUI() const override;
+		void drawUI() override;
 		EScene GetScene() const override;
 	private:
 		class Game* mGame;
+
+		Font font{ FontMethod::MSDF, 48 };
 	};
 }

@@ -4,7 +4,13 @@ using namespace SinGame;
 
 GridTexture::GridTexture(const Image& image)
 {
-	if (image.height() / 12 == image.width() / 16)
+	if (image.height() / 4 == 28)
+	{
+		int tileHeight = 28;
+		int tileWidth = 20;
+		MakeTileByHeightWidth(image, tileHeight, tileWidth);
+	}
+	else if (image.height() / 12 == image.width() / 16)
 	{
 		int tileSize = 32;
 		MakeTile(image, tileSize);
@@ -34,3 +40,28 @@ void GridTexture::MakeTile(const Image& baseImage, const int size)
 
 	mGridTextures = textures;
 }
+
+void GridTexture::MakeTileByHeightWidth(const Image& baseImage, const int height, const int width)
+{
+	Array<Texture> textures;
+
+	for (int i = 0; i < baseImage.width()/width; i++)
+	{
+		for (int j = 0; j < baseImage.height() / height; j++)
+		{
+			//タイルの左上座標
+			int x = width * i;
+			int y = height * j;
+
+			//baseImageからwidth x heightの領域を切り出す
+			Image tileImage = baseImage.clipped(x, y, width, height);
+
+			textures.push_back(Texture(tileImage));
+			tileImage.release();
+		}
+
+		mGridTextures = textures;
+	}
+}
+
+

@@ -920,5 +920,8 @@
     <ClInclude Include="Map\World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameUIToolKit\GameUIToolKit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

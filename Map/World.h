@@ -18,7 +18,7 @@ namespace SinGame
 		Winter,
 	};
 
-	class World
+	class World : public Actor
 	{
 	public:
 		World(class Game* game);

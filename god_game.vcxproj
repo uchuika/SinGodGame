@@ -351,6 +351,7 @@
     <ClInclude Include="Component\SpriteComponent.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameUIToolKit\GameUIToolKit.h" />
     <ClInclude Include="Map\MapGrid.h" />
     <ClInclude Include="Map\GridTexture.h" />
     <ClInclude Include="Map\World.h" />

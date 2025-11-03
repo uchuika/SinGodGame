@@ -1,8 +1,10 @@
 ﻿#include <Siv3D.hpp>
 
 #include "GameScene.h"
+#include "../GameUIToolKit/GameUIToolKit.h"
 
 using namespace SinGame;
+using namespace GameUIToolKit;
 
 const char* GameScene::ParameterTagStage = "ParameterTagStage";	//パラメータのタグ「ステージ」
 const char* GameScene::ParameterTagLevel = "ParameterTagLevel";	//パラメータのタグ「レベル」
@@ -10,6 +12,7 @@ const char* GameScene::ParameterTagLevel = "ParameterTagLevel";	//パラメー�
 GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, class Game* game)
 	: AbstractScene(impl, parameter, game)
 	, mGame(game)
+	,accumlatedTime(0.0)
 	//, grid(game, 20, 20, GridTexture(Image{ U"Assets/Outside_A2.png" }))
 {
 	//初期化処理
@@ -79,7 +82,7 @@ void GameScene::npcUpdate()
 
 	for (auto resi : ResidentActors)
 	{
-		resi->SetTempLevel(mTempLevel);
+		resi->SetTempLevel(world->GetTempLevel());
 		mTotalFaithLevel += resi->GetFaithLevel();
 
 		double walkSpeed = 0.1;
@@ -128,7 +131,6 @@ void GameScene::npcUpdate()
 			double progress = resi->GetWalkProgress();
 			resi->SetWalkProgress(progress += (Scene::DeltaTime() * walkSpeed));
 
-            // 修正後:
 			Vec2 newPosition = resi->GetPosition().lerp(resi->GetGoalPoint(), progress);
             resi->SetPosition(newPosition);
 			if (1.0 <= progress)
@@ -142,16 +144,33 @@ void GameScene::npcUpdate()
 
 void GameScene::worldUpdate()
 {
-
+	accumlatedTime += Scene::DeltaTime();
+	if (interval <= accumlatedTime)
+	{
+		world->Update();
+		accumlatedTime = 0.0;
+	}
 }
 
 void GameScene::drawUI()
 {
+	constexpr ColorF barBackgroundColor(0.2, 0.8);
+
+	const Array<std::pair<double, ColorF>> barColors = {
+		{ 0.15, ColorF(0.8, 0.2, 0.0) }, // 15 % 未満は赤
+		{ 0.5, ColorF(0.8, 0.6, 0.1) }, // 50 % 未満はオレンジ
+		{ 1.0, ColorF(0.1, 0.8, 0.2) }, // それ以外は緑
+	};
+
+	double TempLevel = world->GetTempLevel();
 	font(U"現在の信仰度: {}"_fmt(mTotalFaithLevel)).draw(0, 0);
 
-	SimpleGUI::Slider(U"温度: {:.2f}"_fmt(mTempLevel), mTempLevel, 0.0, 40.0, Vec2{ 500, 40 });
+	SimpleGUI::Slider(U"温度: {:.2f}"_fmt(TempLevel), TempLevel, 0.0, 40.0, Vec2{ 500, 40 });
 
+	world->SetTempLevel(static_cast<int>(TempLevel));
 
+	ProgressBar(Rect(440, 260, 320, 25), barBackgroundColor, barColors)
+		.draw(TempLevel, 40);
 	
 }
 

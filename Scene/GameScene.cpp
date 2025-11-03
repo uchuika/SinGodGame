@@ -169,7 +169,7 @@ void GameScene::drawUI()
 
 	world->SetTempLevel(static_cast<int>(TempLevel));
 
-	ProgressBar(Rect(440, 260, 320, 25), barBackgroundColor, barColors)
+	ProgressBar(Rect(700, 40, 320, 25), barBackgroundColor, barColors)
 		.draw(TempLevel, 40);
 	
 }

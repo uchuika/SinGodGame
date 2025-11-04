@@ -4,6 +4,7 @@
 #include "../Actor/DirtTile.h"
 #include "../Actor/Tile.h"
 #include "../Actor/Resident.h"
+#include "../Actor/RuleCard.h"
 #include "../Map/GridTexture.h"
 #include "../Map/MapGrid.h"
 #include "../Constants.h"

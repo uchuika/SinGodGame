@@ -12,7 +12,8 @@ const char* GameScene::ParameterTagLevel = "ParameterTagLevel";	//パラメー�
 GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, class Game* game)
 	: AbstractScene(impl, parameter, game)
 	, mGame(game)
-	,accumlatedTime(0.0)
+	, accumlatedTime(0.0)
+	, mTargetFaithLevel(30)		//目標とする信仰度を設定
 	//, grid(game, 20, 20, GridTexture(Image{ U"Assets/Outside_A2.png" }))
 {
 	//初期化処理
@@ -171,7 +172,17 @@ void GameScene::drawUI()
 
 	ProgressBar(Rect(700, 40, 320, 25), barBackgroundColor, barColors)
 		.draw(TempLevel, 40);
-	
+
+
+	if (mTargetFaithLevel <= mTotalFaithLevel)
+	{
+		RuleCard* card = new RuleCard(mGame);
+		card->SetBaseCardTexture(mGame->GetTexture("Assets/BaseCardTexture.png"));
+		card->SetPosition(Vec2(960, 540));
+		card->SetScale(10);
+
+		mTargetFaithLevel *= 1.5;
+	}
 }
 
 EScene GameScene::GetScene() const

@@ -118,6 +118,7 @@
     <ClCompile Include="Actor\Actor.cpp" />
     <ClCompile Include="Actor\DirtTile.cpp" />
     <ClCompile Include="Actor\Resident.cpp" />
+    <ClCompile Include="Actor\RuleCard.cpp" />
     <ClCompile Include="Actor\Tile.cpp" />
     <ClCompile Include="Component\CharacterComponent.cpp" />
     <ClCompile Include="Component\Component.cpp" />
@@ -345,6 +346,7 @@
     <ClInclude Include="Actor\DirtTile.h" />
     <ClInclude Include="Actor\InputState.h" />
     <ClInclude Include="Actor\Resident.h" />
+    <ClInclude Include="Actor\RuleCard.h" />
     <ClInclude Include="Actor\Tile.h" />
     <ClInclude Include="Component\CharacterComponent.h" />
     <ClInclude Include="Component\Component.h" />

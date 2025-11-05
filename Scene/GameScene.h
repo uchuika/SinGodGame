@@ -34,7 +34,8 @@ namespace SinGame
 		class Game* mGame;
 		Array<class SpriteComponent*> sprites;
 		Array<class CharacterComponent*> characters;
-		Array<class Resident*> ResidentActors;	
+		Array<class Resident*> ResidentActors;
+		Array<class RuleCard*> RuleCardActors;
 
 		//NPCの行動を更新
 		void npcUpdate();

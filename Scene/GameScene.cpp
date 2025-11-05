@@ -30,6 +30,18 @@ GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, 
 	grid = new MapGrid(game, 20, 20, gridTexture);
 	world = new World(game);
 
+	//ルールカード表示用Actorを初期化
+	for(int i = 0; i < 3; i++)
+	{
+		RuleCard* card = new RuleCard(mGame);
+		card->SetBaseCardTexture(mGame->GetTexture("Assets/BaseCardTexture.png"));
+		card->SetPosition(Vec2(640 + i * 320, 540));
+		card->SetScale(10);
+		card->SetState(EPaused);
+
+		RuleCardActors.push_back(card);
+	}
+
 	//住民のテクスチャマップ
 	GridTexture resiGridTex = GridTexture(Image{ U"example/spritesheet/siv3d-kun-16.png" });
 
@@ -176,10 +188,10 @@ void GameScene::drawUI()
 
 	if (mTargetFaithLevel <= mTotalFaithLevel)
 	{
-		RuleCard* card = new RuleCard(mGame);
-		card->SetBaseCardTexture(mGame->GetTexture("Assets/BaseCardTexture.png"));
-		card->SetPosition(Vec2(960, 540));
-		card->SetScale(10);
+		for(auto ruleCard : RuleCardActors)
+		{
+			ruleCard->SetState(EActive);
+		}
 
 		mTargetFaithLevel *= 1.5;
 	}

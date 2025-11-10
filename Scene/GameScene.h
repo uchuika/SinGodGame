@@ -10,10 +10,17 @@
 #include "../Constants.h"
 #include "../Component/SpriteComponent.h"
 #include "../Component/CharacterComponent.h"
+#include "../Component/UISpriteComponent.h"
 #include "../Map/World.h"
 
 namespace SinGame
 {
+	enum GameState
+	{
+		CardSelecting,
+		GameProgress,
+	};
+
 	class GameScene : public AbstractScene
 	{
 	public:
@@ -34,6 +41,7 @@ namespace SinGame
 		class Game* mGame;
 		Array<class SpriteComponent*> sprites;
 		Array<class CharacterComponent*> characters;
+		Array<class UISpriteComponent*> uiSprites;
 		Array<class Resident*> ResidentActors;
 		Array<class RuleCard*> RuleCardActors;
 
@@ -42,6 +50,8 @@ namespace SinGame
 
 		//世界の状態を更新
 		void worldUpdate();
+
+		GameState mGameState;
 
 		MapGrid* grid;
 		World* world;

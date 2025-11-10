@@ -12,6 +12,7 @@
 #include "Actor/DirtTile.h"
 #include "Component/SpriteComponent.h"
 #include "Component/CharacterComponent.h"
+#include "Component/UISpriteComponent.h"
 #include "Scene/GameScene.h"
 #include "Scene/TitleScene.h"
 #include "Scene/CommonSceneData.h"
@@ -238,6 +239,32 @@ void Game::RemoveSprite(SpriteComponent* sprite)
 {
 	auto iter = std::find(mSprites.begin(), mSprites.end(), sprite);
 	mSprites.erase(iter);
+}
+
+void Game::AddUISprite(UISpriteComponent* ui)
+{
+	// ソートされたベクトルの挿入点を見つける
+	// (自分よりドロー順位の高い最初の要素)
+	int myDrawOrder = ui->GetDrawOrder();
+	auto iter = mUISprites.begin();
+	for (;
+		iter != mUISprites.end();
+		++iter)
+	{
+		if (myDrawOrder < (*iter)->GetDrawOrder())
+		{
+			break;
+		}
+	}
+
+	// イテレータの位置より前に要素を挿入する
+	mUISprites.insert(iter, ui);
+}
+
+void Game::RemoveUISprite(UISpriteComponent* ui)
+{
+	auto iter = std::find(mUISprites.begin(), mUISprites.end(), ui);
+	mUISprites.erase(iter);
 }
 
 void Game::AddCharacter(CharacterComponent* chara)

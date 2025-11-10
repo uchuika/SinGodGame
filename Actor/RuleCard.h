@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "../Component/UISpriteComponent.h"
 #include "../Actor/Actor.h"
 #include "../Game.h"
 
@@ -16,7 +17,7 @@ namespace SinGame
 
 	private:
 		void UpdateTexture();
-		class SpriteComponent* mSprite;
+		class UISpriteComponent* mUISprite;
 
 		Texture mBaseCardTexture;
 	};

@@ -37,7 +37,7 @@ GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, 
 		card->SetBaseCardTexture(mGame->GetTexture("Assets/BaseCardTexture.png"));
 		card->SetPosition(Vec2(640 + i * 320, 540));
 		card->SetScale(10);
-		card->SetState(EPaused);
+		card->SetState(Actor::EPaused);
 
 		RuleCardActors.push_back(card);
 	}
@@ -53,16 +53,33 @@ GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, 
 		resi->SetGoalPoint(resi->GetPosition());
 
 		ResidentActors.push_back(resi);
-	}	
+	}
+
+	//ゲームを進行状態にする
+	mGameState = GameState::GameProgress;
 }
 
 void GameScene::update()
 {
 	sprites = mGame->GetSprites();
 	characters = mGame->GetCharacters();
+	uiSprites = mGame->GetUISprites();
 
 	npcUpdate();
 	worldUpdate();
+
+	if (mTargetFaithLevel <= mTotalFaithLevel)
+	{
+		for (auto ruleCard : RuleCardActors)
+		{
+			ruleCard->SetState(Actor::EActive);
+		}
+
+		//ゲームをカード選択状態にする
+		mGameState = GameState::CardSelecting;
+
+		mTargetFaithLevel *= 1.5;
+	}
 
 	//シーンチェンジ(タイトル画面に戻る)
 	if (KeyEscape.down())
@@ -177,6 +194,7 @@ void GameScene::drawUI()
 
 	double TempLevel = world->GetTempLevel();
 	font(U"現在の信仰度: {}"_fmt(mTotalFaithLevel)).draw(0, 0);
+	font(U"目的の信仰度: {}"_fmt(mTargetFaithLevel)).draw(0, 48);
 
 	SimpleGUI::Slider(U"温度: {:.2f}"_fmt(TempLevel), TempLevel, 0.0, 40.0, Vec2{ 500, 40 });
 
@@ -185,15 +203,9 @@ void GameScene::drawUI()
 	ProgressBar(Rect(700, 40, 320, 25), barBackgroundColor, barColors)
 		.draw(TempLevel, 40);
 
-
-	if (mTargetFaithLevel <= mTotalFaithLevel)
+	for (UISpriteComponent* ui : uiSprites)
 	{
-		for(auto ruleCard : RuleCardActors)
-		{
-			ruleCard->SetState(EActive);
-		}
-
-		mTargetFaithLevel *= 1.5;
+		ui->Draw();
 	}
 }
 

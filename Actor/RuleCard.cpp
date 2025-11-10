@@ -6,7 +6,7 @@ using namespace SinGame;
 RuleCard::RuleCard(class Game* game)
 	:Actor(game)
 {
-	mSprite = new SpriteComponent(this);
+	mUISprite = new UISpriteComponent(this);
 }
 
 void RuleCard::UpdateActor(double deltaTime)
@@ -22,6 +22,6 @@ void RuleCard::SetBaseCardTexture(Texture baseTex)
 
 void RuleCard::UpdateTexture()
 {
-	mSprite->SetTexture(mBaseCardTexture);
+	mUISprite->SetTexture(mBaseCardTexture);
 }
 

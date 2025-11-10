@@ -17,9 +17,9 @@ SpriteComponent::~SpriteComponent()
 
 void SpriteComponent::Draw()
 {
+
 	if (not mTexture.isEmpty())
 	{
-		
 		mTexture.scaled(mOwner->GetScale()).drawAt(mOwner->GetPosition());
 	}
 }

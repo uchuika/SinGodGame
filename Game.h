@@ -28,6 +28,9 @@ namespace SinGame
 		void AddSprite(class SpriteComponent* sprite);
 		void RemoveSprite(class SpriteComponent* sprite);
 
+		void AddUISprite(class UISpriteComponent* ui);
+		void RemoveUISprite(class UISpriteComponent* ui);
+
 		void AddCharacter(class CharacterComponent* chara);
 		void RemoveCharacter(class CharacterComponent* chara);
 
@@ -38,6 +41,7 @@ namespace SinGame
 		Texture GetTexture(const std::string fileName);
 
 		Array<class SpriteComponent*>& GetSprites() { return mSprites; }
+		Array<class UISpriteComponent*>& GetUISprites() { return mUISprites; }
 		Array<class CharacterComponent*>& GetCharacters() { return mCharacters; }
 		Array<class Actor*>& GetActors() { return mActors; }
 
@@ -69,6 +73,9 @@ namespace SinGame
 
 		//描画スプライトコンポーネントの配列
 		Array<class SpriteComponent*> mSprites;
+
+		//UIスプライトコンポーネントの配列
+		Array<class UISpriteComponent*> mUISprites;
 
 		//描画キャラクターコンポーネントの配列
 		Array<class CharacterComponent*> mCharacters;

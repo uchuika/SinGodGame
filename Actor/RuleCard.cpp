@@ -7,10 +7,17 @@ RuleCard::RuleCard(class Game* game)
 	:Actor(game)
 {
 	mUISprite = new UISpriteComponent(this);
+	collisionRect = RectF{ GetPosition().x, GetPosition().y, 360, 640 };
 }
 
 void RuleCard::UpdateActor(double deltaTime)
 {
+	collisionRect.x = GetPosition().x-180;
+	collisionRect.y = GetPosition().y-320;
+	if (collisionRect.mouseOver())
+	{
+		Print << U"mouseOver";
+	}
 	
 }
 

@@ -19,7 +19,7 @@ namespace SinGame
 		void UpdateTexture();
 		class UISpriteComponent* mUISprite;
 
-		Rect collisionRect;
+		RectF collisionRect;
 
 		Texture mBaseCardTexture;
 	};

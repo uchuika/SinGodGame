@@ -938,8 +938,5 @@
     <ClInclude Include="Component\UISpriteComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\CardSelectingScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

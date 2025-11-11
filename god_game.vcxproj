@@ -131,7 +131,6 @@
     <ClCompile Include="Map\MapGrid.cpp" />
     <ClCompile Include="Map\World.cpp" />
     <ClCompile Include="Scene\AbstractScene.cpp" />
-    <ClCompile Include="Scene\CardSelectingScene.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\Parameter.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />

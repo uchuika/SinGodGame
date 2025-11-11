@@ -35,8 +35,8 @@ GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, 
 	{
 		RuleCard* card = new RuleCard(mGame);
 		card->SetBaseCardTexture(mGame->GetTexture("Assets/BaseCardTexture.png"));
-		card->SetPosition(Vec2(480 + i * 480, 540));
-		card->SetScale(15);
+		card->SetPosition(Vec2(320 + i * 640, 540));
+		card->SetScale(20);
 		card->SetState(Actor::EPaused);
 
 		RuleCardActors.push_back(card);
@@ -73,6 +73,12 @@ void GameScene::update()
 		case GameProgress:
 			if (mTargetFaithLevel <= mTotalFaithLevel)
 			{
+				for (auto ruleCard : RuleCardActors)
+				{
+					ruleCard->SetState(Actor::EActive);
+
+				}
+
 				//ゲームをカード選択状態にする
 				mGameState = GameState::CardSelecting;
 
@@ -80,11 +86,7 @@ void GameScene::update()
 			}
 			break;
 		case CardSelecting:
-			for (auto ruleCard : RuleCardActors)
-			{
-				ruleCard->SetState(Actor::EActive);
-
-			}
+			
 
 			mGameState = GameState::GameProgress;
 			break;

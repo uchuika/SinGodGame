@@ -85,12 +85,25 @@ void GameScene::update()
 			}
 			break;
 		case CardSelecting:
+			bool mouseOver = false;
+
 			for (auto ruleCard : RuleCardActors)
 			{
 				if(ruleCard->IsMouseOver())
 				{
-					mGameState = GameState::GameProgress;
+					mouseOver = true;
 				}
+			}
+
+			if (mouseOver)
+			{
+				for (auto ruleCard : RuleCardActors)
+				{
+					ruleCard->SetState(Actor::EPaused);
+				}
+
+				mGameState = GameState::GameProgress;
+				mouseOver = false;
 			}
 			break;
 	}

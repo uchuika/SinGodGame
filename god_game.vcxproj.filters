@@ -198,7 +198,7 @@
     <ClCompile Include="Component\UISpriteComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\CardSelectingScene.cpp">
+    <ClCompile Include="Actor\Crops.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -936,6 +936,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Component\UISpriteComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\CardSelectingScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Crops.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Actor.cpp" />
+    <ClCompile Include="Actor\Crops.cpp" />
     <ClCompile Include="Actor\DirtTile.cpp" />
     <ClCompile Include="Actor\Resident.cpp" />
     <ClCompile Include="Actor\RuleCard.cpp" />
@@ -344,6 +345,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Actor.h" />
+    <ClInclude Include="Actor\Crops.h" />
     <ClInclude Include="Actor\DirtTile.h" />
     <ClInclude Include="Actor\InputState.h" />
     <ClInclude Include="Actor\Resident.h" />

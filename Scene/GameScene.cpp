@@ -76,7 +76,6 @@ void GameScene::update()
 				for (auto ruleCard : RuleCardActors)
 				{
 					ruleCard->SetState(Actor::EActive);
-
 				}
 
 				//ゲームをカード選択状態にする
@@ -86,9 +85,13 @@ void GameScene::update()
 			}
 			break;
 		case CardSelecting:
-			
-
-			mGameState = GameState::GameProgress;
+			for (auto ruleCard : RuleCardActors)
+			{
+				if(ruleCard->IsMouseOver())
+				{
+					mGameState = GameState::GameProgress;
+				}
+			}
 			break;
 	}
 

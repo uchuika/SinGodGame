@@ -15,6 +15,8 @@ namespace SinGame
 
 		void UpdateActor(double deltaTime) override;
 
+		bool IsMouseOver();
+
 	private:
 		void UpdateTexture();
 		class UISpriteComponent* mUISprite;

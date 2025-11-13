@@ -14,17 +14,22 @@ void RuleCard::UpdateActor(double deltaTime)
 {
 	collisionRect.x = GetPosition().x-180;
 	collisionRect.y = GetPosition().y-320;
-	if (collisionRect.mouseOver())
-	{
-		Print << U"mouseOver";
-	}
-	
 }
 
 void RuleCard::SetBaseCardTexture(Texture baseTex)
 {
 	mBaseCardTexture = baseTex;
 	UpdateTexture();
+}
+
+bool RuleCard::IsMouseOver()
+{
+	if(collisionRect.mouseOver())
+	{
+		Print << U"mouseOver";
+	}
+
+	return collisionRect.mouseOver();
 }
 
 void RuleCard::UpdateTexture()

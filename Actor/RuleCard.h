@@ -17,6 +17,8 @@ namespace SinGame
 
 		bool IsMouseOver();
 
+		bool IsPressed();
+
 	private:
 		void UpdateTexture();
 		class UISpriteComponent* mUISprite;

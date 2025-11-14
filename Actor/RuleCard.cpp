@@ -26,10 +26,20 @@ bool RuleCard::IsMouseOver()
 {
 	if(collisionRect.mouseOver())
 	{
-		Print << U"mouseOver";
+		Logger << U"mouseOver";
 	}
 
 	return collisionRect.mouseOver();
+}
+
+bool RuleCard::IsPressed()
+{
+	if (collisionRect.leftPressed())
+	{
+		Print << U"leftPressed";
+	}
+
+	return collisionRect.leftPressed();
 }
 
 void RuleCard::UpdateTexture()

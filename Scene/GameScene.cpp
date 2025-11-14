@@ -89,7 +89,7 @@ void GameScene::update()
 
 			for (auto ruleCard : RuleCardActors)
 			{
-				if(ruleCard->IsMouseOver())
+				if(ruleCard->IsPressed())
 				{
 					mouseOver = true;
 				}

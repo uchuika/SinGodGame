@@ -5,6 +5,7 @@
 #include "../Actor/Tile.h"
 #include "../Actor/Resident.h"
 #include "../Actor/RuleCard.h"
+#include "../Actor/Crops.h"
 #include "../Map/GridTexture.h"
 #include "../Map/MapGrid.h"
 #include "../Constants.h"
@@ -44,6 +45,7 @@ namespace SinGame
 		Array<class UISpriteComponent*> uiSprites;
 		Array<class Resident*> ResidentActors;
 		Array<class RuleCard*> RuleCardActors;
+		Array<class Crops*> CropsActors;
 
 		//NPCの行動を更新
 		void npcUpdate();

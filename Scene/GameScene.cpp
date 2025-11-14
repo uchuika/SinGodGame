@@ -45,6 +45,7 @@ GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, 
 	//住民のテクスチャマップ
 	GridTexture resiGridTex = GridTexture(Image{ U"example/spritesheet/siv3d-kun-16.png" });
 
+	//住人の初期化
 	for (int i = 0; i < Random(5, 20); i++) {
 		Resident* resi = new Resident(game);
 		resi->SetGridTexture(resiGridTex.GetGridTextures());
@@ -53,6 +54,14 @@ GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, 
 		resi->SetGoalPoint(resi->GetPosition());
 
 		ResidentActors.push_back(resi);
+	}
+
+	//作物の初期化
+	for(int i = 0; i < Random(15,20); i++)
+	{
+		Crops* crop = new Crops(game);
+		
+		CropsActors.push_back(crop);
 	}
 
 	//ゲームを進行状態にする
@@ -86,7 +95,8 @@ void GameScene::update()
 			break;
 		case CardSelecting:
 			bool mouseOver = false;
-
+			
+			//マウスが触れているかどうか判定
 			for (auto ruleCard : RuleCardActors)
 			{
 				if(ruleCard->IsPressed())
@@ -101,7 +111,7 @@ void GameScene::update()
 				{
 					ruleCard->SetState(Actor::EPaused);
 				}
-
+				//状態をゲーム進行中にする
 				mGameState = GameState::GameProgress;
 				mouseOver = false;
 			}
@@ -139,11 +149,16 @@ void GameScene::npcUpdate()
 
 	for (auto resi : ResidentActors)
 	{
+		//住人の温度をWorldの温度と同期
 		resi->SetTempLevel(world->GetTempLevel());
+
+		//信仰の合計を取得
 		mTotalFaithLevel += resi->GetFaithLevel();
 
-		double walkSpeed = 0.1;
+		//Todo : 住人の空腹度についての処理
 
+		//住人の移動についての処理
+		double walkSpeed = 0.1;
 		//移動していない場合かつ確立で
 		if (resi->GetGoalPoint() == resi->GetPosition() && Random(1,100) % 100==0)
 		{

@@ -9,7 +9,7 @@ Resident::Resident(class Game* game)
 	:Actor(game)
 	,mTextureNum(0)
 	,mFaithLevel(0)
-	,HangryLevel(100)
+	,HangryLevel(0)
 	,TempLevel(15)
 	,goalPoint(GetPosition())
 {
@@ -32,9 +32,9 @@ void Resident::UpdateActor(double deltaTime)
 	{
 		mFaithLevel += 5.0;
 	}
-	if (HangryLevel >= 80 && HangryLevel <= 100)
+	if (HangryLevel >= 0 && HangryLevel <= 10)
 	{
-
+		mFaithLevel += 5.0;
 	}
 }
 

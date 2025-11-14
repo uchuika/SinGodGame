@@ -164,7 +164,7 @@ void GameScene::npcUpdate()
 	{
 		//住人の温度をWorldの温度と同期
 		resi->SetTempLevel(world->GetTempLevel());
-		resi->SetHangryLevel(resi->GetHangryLevel() - 1);
+		resi->SetHangryLevel(resi->GetHangryLevel() + 1);
 
 		//Todo : 住人の空腹度についての処理
 
@@ -174,7 +174,7 @@ void GameScene::npcUpdate()
 			if (Intersect(*crop->GetCircle(), *(resi->GetCircle())))
 			{
 				crop->GetCropComponent()->CollectCrop();
-				
+				resi->SetHangryLevel(resi->GetHangryLevel() - 1);
 			}
 		}
 

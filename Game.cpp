@@ -15,7 +15,6 @@
 #include "Component/UISpriteComponent.h"
 #include "Scene/GameScene.h"
 #include "Scene/TitleScene.h"
-#include "Scene/CommonSceneData.h"
 
 using namespace SinGame;
 

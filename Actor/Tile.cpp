@@ -10,7 +10,7 @@ Tile::Tile(class Game* game)
 	,mSelected(false)
 	, mTextureNum(0)
 {
-	mSprite = new SpriteComponent(this);
+	mSprite = new SpriteComponent(this, 40);
 }
 
 void Tile::SetGridTexture(Array<Texture>& texutres)

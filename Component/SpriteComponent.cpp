@@ -7,7 +7,7 @@ SpriteComponent::SpriteComponent(Actor* owner, int drawOrder)
 	,mTexture(Texture{ U"リンゴ"_emoji })
 	, mDrawOrder(drawOrder)
 {
-	mOwner -> GetGame()->AddSprite(this);
+	mOwner->GetGame()->AddSprite(this);
 }
 
 SpriteComponent::~SpriteComponent()
@@ -18,7 +18,7 @@ SpriteComponent::~SpriteComponent()
 void SpriteComponent::Draw()
 {
 
-	if (not mTexture.isEmpty())
+	if (not mTexture.isEmpty() && mOwner->GetState() == Actor::EActive)
 	{
 		mTexture.scaled(mOwner->GetScale()).drawAt(mOwner->GetPosition());
 	}

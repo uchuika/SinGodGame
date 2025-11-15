@@ -20,6 +20,7 @@ namespace SinGame
 	{
 		CardSelecting,
 		GameProgress,
+		None,
 	};
 
 	class GameScene : public AbstractScene
@@ -53,7 +54,7 @@ namespace SinGame
 		//世界の状態を更新
 		void worldUpdate();
 
-		GameState mGameState;
+		GameState mGameState = None;
 
 		MapGrid* grid;
 		World* world;

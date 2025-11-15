@@ -49,7 +49,7 @@ GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, 
 	for (int i = 0; i < Random(5, 20); i++) {
 		Resident* resi = new Resident(game);
 		resi->SetGridTexture(resiGridTex.GetGridTextures());
-		resi->SetPosition(Vec2(400 + grid->GetTileScale() * 32 * Random(0, 20), 300 + grid->GetTileScale() * 32 * Random(0, 20)));
+		resi->SetPosition(Vec2(400 + grid->GetTileScale() * 32 * Random(0, 19), 300 + grid->GetTileScale() * 32 * Random(0, 19)));
 		resi->SetScale(grid->GetTileScale());
 		resi->SetGoalPoint(resi->GetPosition());
 
@@ -60,7 +60,10 @@ GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, 
 	for(int i = 0; i < Random(15,20); i++)
 	{
 		Crops* crop = new Crops(game);
-		
+		crop->SetPosition(Vec2(400 + grid->GetTileScale() * 32 * Random(0,19), 300 + grid->GetTileScale() * 32 * Random(0, 19)));
+		crop->SetScale(grid->GetTileScale());
+		crop->SetTexture(gridTexture.GetGridTextures()[99]);
+
 		CropsActors.push_back(crop);
 	}
 
@@ -70,6 +73,12 @@ GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, 
 
 void GameScene::update()
 {
+	//初期化処理が終わってなかったらスキップ
+	if (mGameState == None)
+	{
+		return;
+	}
+
 	sprites = mGame->GetSprites();
 	characters = mGame->GetCharacters();
 	uiSprites = mGame->GetUISprites();
@@ -94,18 +103,18 @@ void GameScene::update()
 			}
 			break;
 		case CardSelecting:
-			bool mouseOver = false;
+			bool isPressed = false;
 			
 			//マウスが触れているかどうか判定
 			for (auto ruleCard : RuleCardActors)
 			{
 				if(ruleCard->IsPressed())
 				{
-					mouseOver = true;
+					isPressed = true;
 				}
 			}
 
-			if (mouseOver)
+			if (isPressed)
 			{
 				for (auto ruleCard : RuleCardActors)
 				{
@@ -113,7 +122,7 @@ void GameScene::update()
 				}
 				//状態をゲーム進行中にする
 				mGameState = GameState::GameProgress;
-				mouseOver = false;
+				isPressed = false;
 			}
 			break;
 	}
@@ -127,6 +136,11 @@ void GameScene::update()
 
 void GameScene::draw() const
 {
+	if (mGameState == None)
+	{
+		return;
+	}
+
 	Camera2D camera = mGame->GetCamera();
 	const auto t = camera.createTransformer();
 
@@ -220,12 +234,27 @@ void GameScene::worldUpdate()
 	if (interval <= accumlatedTime)
 	{
 		world->Update();
+
+		//作物を成長させる
+		for (auto crop : CropsActors)
+		{
+			int currentLevel = crop->GetGrowLevel();
+			crop->SetGrowLevel(currentLevel + 1);
+		}
+
 		accumlatedTime = 0.0;
 	}
+
+	
 }
 
 void GameScene::drawUI()
 {
+	if (mGameState == None)
+	{
+		return;
+	}
+
 	constexpr ColorF barBackgroundColor(0.2, 0.8);
 
 	const Array<std::pair<double, ColorF>> barColors = {

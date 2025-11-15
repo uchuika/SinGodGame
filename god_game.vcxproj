@@ -363,7 +363,6 @@
     <ClInclude Include="Map\World.h" />
     <ClInclude Include="Scene\AbstractScene.h" />
     <ClInclude Include="Scene\CardSelectingScene.h" />
-    <ClInclude Include="Scene\CommonSceneData.h" />
     <ClInclude Include="Scene\EScene.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\IOnSceneChangedListener.h" />

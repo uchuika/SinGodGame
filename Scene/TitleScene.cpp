@@ -15,7 +15,6 @@ void TitleScene::update()
 {
 	if (KeyZ.down())
 	{
-
 		Parameter parameter;
 		_implSceneChanged->onSceneChanged(EScene::Game,parameter, false);
 	}

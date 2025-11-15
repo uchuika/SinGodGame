@@ -19,7 +19,6 @@ void UISpriteComponent::Draw()
 {
 	if (not mTexture.isEmpty() && mOwner->GetState() == Actor::EActive)
 	{
-
 		mTexture.scaled(mOwner->GetScale()).drawAt(mOwner->GetPosition());
 	}
 }

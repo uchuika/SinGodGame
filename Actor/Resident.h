@@ -19,6 +19,9 @@ namespace SinGame
 		void SetTempLevel(int templevel) { TempLevel = templevel; }
 		int GetTempLevel() { return TempLevel; }
 
+		void SetHangryLevel(int hangryLevel) { HangryLevel = hangryLevel; }
+		int GetHangryLevel() { return HangryLevel; }
+
 		void SetWalkProgress(double progress) { mWalkProgress = progress; }
 		double GetWalkProgress() { return mWalkProgress; }
 

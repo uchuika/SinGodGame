@@ -164,19 +164,22 @@ void GameScene::npcUpdate()
 	{
 		//住人の温度をWorldの温度と同期
 		resi->SetTempLevel(world->GetTempLevel());
-
-		//信仰の合計を取得
-		mTotalFaithLevel += resi->GetFaithLevel();
+		resi->SetHangryLevel(resi->GetHangryLevel() - 1);
 
 		//Todo : 住人の空腹度についての処理
+
+		//作物の回収
 		for (auto crop : CropsActors)
 		{
 			if (Intersect(*crop->GetCircle(), *(resi->GetCircle())))
 			{
 				crop->GetCropComponent()->CollectCrop();
+				
 			}
 		}
-		
+
+		//信仰の合計を取得
+		mTotalFaithLevel += resi->GetFaithLevel();
 
 		//住人の移動についての処理
 		double walkSpeed = 0.1;

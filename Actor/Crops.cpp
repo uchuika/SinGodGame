@@ -1,13 +1,16 @@
 ﻿#include "Crops.h"
 #include "../Component/SpriteComponent.h"
 
+
 using namespace SinGame;
 
 Crops::Crops(class Game* game)
 	:Actor(game)
-	, mCropState(EGrowing)
 {
 	mSprite = new SpriteComponent(this, 50);
+	mCrop = new CropComponent(this);
+	mCircle = new CircleComponent(this);
+	mCircle->SetRadius(23.2);
 }
 
 void Crops::SetGridTexture(GridTexture gridTex)
@@ -16,29 +19,32 @@ void Crops::SetGridTexture(GridTexture gridTex)
 	UpdateTexture();
 }
 
-void Crops::SetCropState(CropState cropState)
-{
-
-}
 
 void Crops::UpdateActor(double deltaTime)
 {
+	
+}
 
-	if (mMaxGrowLevel == mGrowLevel)
-	{
-		mCropState = ECompleted;
-		UpdateTexture();
-	}
+int Crops::GetGrowLevel()
+{
+	return mCrop->GetGrowLevel();
+}
+
+void Crops::SetGrowLevel(int growLevel)
+{
+	mCrop->SetGrowLevel(growLevel);
+	UpdateTexture();
 }
 
 void Crops::UpdateTexture()
 {
+	CropComponent::CropState mCropState = mCrop->GetCropState();
 	switch (mCropState)
 	{
-	case EGrowing:
+	case CropComponent::CropState::EGrowing:
 		mSprite->SetTexture(mGridTexture.GetGridTextures()[99]);
 		break;
-	case ECompleted:
+	case CropComponent::CropState::ECompleted:
 		mSprite->SetTexture(mGridTexture.GetGridTextures()[96]);
 	}
 }

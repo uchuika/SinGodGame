@@ -1,6 +1,7 @@
 ﻿#include "Resident.h"
 #include "../Component/CharacterComponent.h"
 #include "../Component/SpriteComponent.h"
+#include "../Component/CircleComponent.h"
 
 using namespace SinGame;
 
@@ -13,6 +14,8 @@ Resident::Resident(class Game* game)
 	,goalPoint(GetPosition())
 {
 	mSprite = new SpriteComponent(this);
+	mCircle = new CircleComponent(this);
+	mCircle->SetRadius(23.2);
 }
 
 void Resident::UpdateActor(double deltaTime)

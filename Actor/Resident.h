@@ -25,11 +25,14 @@ namespace SinGame
 		void SetGoalPoint(Vec2 point) { goalPoint = point; }
 		Vec2 GetGoalPoint() { return goalPoint; }
 
+		class CircleComponent* GetCircle() { return mCircle; }
+
 		void UpdateActor(double deltaTime) override;
 
 	private:
 		void UpdateTexture();
 		class SpriteComponent* mSprite;
+		class CircleComponent* mCircle;
 
 		Array<Texture> mGridTextures;
 

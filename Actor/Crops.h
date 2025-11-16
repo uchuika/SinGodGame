@@ -1,8 +1,10 @@
 ﻿#pragma once
 
-#include "../Component/SpriteComponent.h"
 #include "../Actor/Actor.h"
 #include "../Map/GridTexture.h"
+#include "../Component/CropComponent.h"
+#include "../Component/CircleComponent.h"
+#include "../Component/SpriteComponent.h"
 #include "../Game.h"
 
 namespace SinGame
@@ -10,11 +12,6 @@ namespace SinGame
 	class Crops : public Actor
 	{
 	public:
-		enum CropState
-		{
-			EGrowing,
-			ECompleted,
-		};
 
 		Crops(class Game* game);
 
@@ -22,19 +19,18 @@ namespace SinGame
 
 		void UpdateActor(double deltaTime) override;
 
-		void SetGrowLevel(int level) { mGrowLevel = level; }
-		int GetGrowLevel() { return mGrowLevel; }
+		class CropComponent* GetCropComponent() { return mCrop; }
+		class CircleComponent* GetCircle() { return mCircle; }
 
-		void SetMaxGrowLevel(int level) { mMaxGrowLevel = level; };
+		int GetGrowLevel();
+		void SetGrowLevel(int growLevel);
 
 	private:
 		void UpdateTexture();
+		class CircleComponent* mCircle;
 		class SpriteComponent* mSprite;
+		class CropComponent* mCrop;
 
 		GridTexture mGridTexture;
-
-		CropState mCropState;
-		int mGrowLevel = 0;
-		int mMaxGrowLevel = 10;
 	};
 }

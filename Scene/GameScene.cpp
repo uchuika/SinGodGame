@@ -13,7 +13,7 @@ GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, 
 	: AbstractScene(impl, parameter, game)
 	, mGame(game)
 	, accumlatedTime(0.0)
-	, mTargetFaithLevel(30)		//目標とする信仰度を設定
+	, mTargetFaithLevel(45)		//目標とする信仰度を設定
 	//, grid(game, 20, 20, GridTexture(Image{ U"Assets/Outside_A2.png" }))
 {
 	//初期化処理
@@ -95,7 +95,6 @@ void GameScene::update()
 				{
 					ruleCard->SetState(Actor::EActive);
 				}
-
 				//ゲームをカード選択状態にする
 				mGameState = GameState::CardSelecting;
 
@@ -170,6 +169,14 @@ void GameScene::npcUpdate()
 		mTotalFaithLevel += resi->GetFaithLevel();
 
 		//Todo : 住人の空腹度についての処理
+		for (auto crop : CropsActors)
+		{
+			if (Intersect(*crop->GetCircle(), *(resi->GetCircle())))
+			{
+				crop->GetCropComponent()->CollectCrop();
+			}
+		}
+		
 
 		//住人の移動についての処理
 		double walkSpeed = 0.1;
@@ -244,8 +251,6 @@ void GameScene::worldUpdate()
 
 		accumlatedTime = 0.0;
 	}
-
-	
 }
 
 void GameScene::drawUI()

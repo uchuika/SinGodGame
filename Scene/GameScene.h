@@ -12,6 +12,7 @@
 #include "../Component/SpriteComponent.h"
 #include "../Component/CharacterComponent.h"
 #include "../Component/UISpriteComponent.h"
+#include "../Component/CircleComponent.h"
 #include "../Map/World.h"
 
 namespace SinGame

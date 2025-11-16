@@ -201,6 +201,12 @@
     <ClCompile Include="Actor\Crops.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Component\CropComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\CircleComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -939,6 +945,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Actor\Crops.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\CropComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\CircleComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

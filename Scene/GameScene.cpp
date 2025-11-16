@@ -62,7 +62,7 @@ GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter, 
 		Crops* crop = new Crops(game);
 		crop->SetPosition(Vec2(400 + grid->GetTileScale() * 32 * Random(0,19), 300 + grid->GetTileScale() * 32 * Random(0, 19)));
 		crop->SetScale(grid->GetTileScale());
-		crop->SetTexture(gridTexture.GetGridTextures()[99]);
+		crop->SetGridTexture(gridTexture);
 
 		CropsActors.push_back(crop);
 	}

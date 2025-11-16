@@ -5,25 +5,40 @@ using namespace SinGame;
 
 Crops::Crops(class Game* game)
 	:Actor(game)
+	, mCropState(EGrowing)
 {
 	mSprite = new SpriteComponent(this, 50);
 }
 
-void Crops::SetTexture(Texture tex)
+void Crops::SetGridTexture(GridTexture gridTex)
 {
-	mTexture = tex;
+	mGridTexture = gridTex;
 	UpdateTexture();
+}
+
+void Crops::SetCropState(CropState cropState)
+{
+
 }
 
 void Crops::UpdateActor(double deltaTime)
 {
-	if (mMaxGrowLevel <= mGrowLevel)
+
+	if (mMaxGrowLevel == mGrowLevel)
 	{
-		mGrowLevel = 0;
+		mCropState = ECompleted;
+		UpdateTexture();
 	}
 }
 
 void Crops::UpdateTexture()
 {
-	mSprite->SetTexture(mTexture);
+	switch (mCropState)
+	{
+	case EGrowing:
+		mSprite->SetTexture(mGridTexture.GetGridTextures()[99]);
+		break;
+	case ECompleted:
+		mSprite->SetTexture(mGridTexture.GetGridTextures()[96]);
+	}
 }

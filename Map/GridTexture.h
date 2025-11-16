@@ -5,10 +5,12 @@ namespace SinGame
 	class GridTexture
 	{
 	public:
+		// 既定のコンストラクタを追加
+		GridTexture() = default;
 		GridTexture(const Image& image);
 
 		Array<Texture>& GetGridTextures() { return mGridTextures; }
-
+		
 	private:
 		void MakeTile(const Image& baseImage, const int size);
 

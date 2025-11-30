@@ -132,6 +132,8 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map\GridTexture.cpp" />
     <ClCompile Include="Map\MapGrid.cpp" />
+    <ClCompile Include="Map\Rule\Rule.cpp" />
+    <ClCompile Include="Map\Rule\RWeather.cpp" />
     <ClCompile Include="Map\World.cpp" />
     <ClCompile Include="Scene\AbstractScene.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
@@ -364,6 +366,8 @@
     <ClInclude Include="GameUIToolKit\GameUIToolKit.h" />
     <ClInclude Include="Map\MapGrid.h" />
     <ClInclude Include="Map\GridTexture.h" />
+    <ClInclude Include="Map\Rule\Rule.h" />
+    <ClInclude Include="Map\Rule\RWeather.h" />
     <ClInclude Include="Map\World.h" />
     <ClInclude Include="Scene\AbstractScene.h" />
     <ClInclude Include="Scene\CardSelectingScene.h" />

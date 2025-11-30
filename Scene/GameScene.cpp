@@ -119,6 +119,9 @@ void GameScene::update()
 				{
 					ruleCard->SetState(Actor::EPaused);
 				}
+
+				//Todo ルールを適用する処理を追加
+
 				//状態をゲーム進行中にする
 				mGameState = GameState::GameProgress;
 				isPressed = false;

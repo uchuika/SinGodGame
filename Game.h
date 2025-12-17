@@ -47,6 +47,9 @@ namespace SinGame
 		//ゲッター/セッター
 		Camera2D GetCamera() { return mCamera; }
 
+		void SetWorld(class World* world) { mWorld = world; }
+		World* GetWorld() { return mWorld; }
+
 		void onSceneChanged(const EScene scene, const Parameter& parameter, const bool stackClear) override;
 		void onSceneChanged(const bool popScene) override;
 
@@ -66,6 +69,9 @@ namespace SinGame
 
 		//全てのアクターを格納
 		Array<class Actor*> mActors;
+
+		//全てのワールドを格納
+		class World* mWorld;
 
 		//待機中のアクターを格納
 		Array<class Actor*> mPendingActors;

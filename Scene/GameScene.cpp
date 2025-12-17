@@ -1,6 +1,7 @@
 ﻿#include <Siv3D.hpp>
 
 #include "GameScene.h"
+#include "../Map/Rule/RWeather.h"
 #include "../GameUIToolKit/GameUIToolKit.h"
 
 using namespace SinGame;
@@ -94,6 +95,7 @@ void GameScene::update()
 				for (auto ruleCard : RuleCardActors)
 				{
 					ruleCard->SetState(Actor::EActive);
+					ruleCard->SetRule(new RWeather(mGame));
 				}
 				//ゲームをカード選択状態にする
 				mGameState = GameState::CardSelecting;
@@ -110,6 +112,7 @@ void GameScene::update()
 				if(ruleCard->IsPressed())
 				{
 					isPressed = true;
+					ruleCard->ApplyRule();
 				}
 			}
 

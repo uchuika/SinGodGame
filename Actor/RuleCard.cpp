@@ -1,4 +1,5 @@
 ﻿#include "RuleCard.h"
+#include "../Map/Rule/Rule.h"
 #include "../Component/SpriteComponent.h"
 
 using namespace SinGame;
@@ -40,6 +41,17 @@ bool RuleCard::IsPressed()
 	}
 
 	return collisionRect.leftPressed();
+}
+
+void RuleCard::SetRule(class Rule* rule)
+{
+	mRule = rule;
+	
+}
+
+void RuleCard::ApplyRule()
+{
+	mRule->ApplyRule();
 }
 
 void RuleCard::UpdateTexture()

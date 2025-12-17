@@ -19,6 +19,12 @@ namespace SinGame
 
 		bool IsPressed();
 
+		//ルールクラスをセット
+		void SetRule(class Rule* rule);
+
+		//ルールを適用
+		void ApplyRule();
+
 	private:
 		void UpdateTexture();
 		class UISpriteComponent* mUISprite;
@@ -26,5 +32,7 @@ namespace SinGame
 		RectF collisionRect;
 
 		Texture mBaseCardTexture;
+
+		Rule* mRule;
 	};
 }

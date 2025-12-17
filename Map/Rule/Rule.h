@@ -12,5 +12,6 @@ namespace SinGame
 		virtual void ApplyRule();
 	private:
 		class Game* mGame;
+		class World* mWorld;
 	};
 }
